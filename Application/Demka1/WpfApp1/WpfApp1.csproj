@@ -186,6 +186,17 @@
   <ItemGroup>
     <Resource Include="Images\icon.png" />
     <Resource Include="icon.jpg" />
+    <Resource Include="Images\2G3280.jpg" />
+    <Resource Include="Images\3L7RCZ.jpg" />
+    <Resource Include="Images\3XBOTN.jpeg" />
+    <Resource Include="Images\BPV4MM.jpg" />
+    <Resource Include="Images\F895RB.jpg" />
+    <Resource Include="Images\JVL42J.jpg" />
+    <Resource Include="Images\MIO8YV.jpg" />
+    <Resource Include="Images\picture.png" />
+    <Resource Include="Images\PMEZMH.jpg" />
+    <Resource Include="Images\S72AM3.jpg" />
+    <Resource Include="Images\UER2QD.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>

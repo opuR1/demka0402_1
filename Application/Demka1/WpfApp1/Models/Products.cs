@@ -32,6 +32,37 @@ namespace WpfApp1.Models
         public Nullable<int> Count { get; set; }
         public string Description { get; set; }
         public string Photo { get; set; }
+
+        public bool IsHighDiscount => this.Discount > 12;
+        public bool IsOutOfStock => this.Count == 0 || this.Count == null;
+        public decimal ActualPrice
+        {
+            get
+            {
+                if (this.Discount == 0 || this.Discount == null)
+                {
+                    return this.Price ?? 0;
+                }
+                decimal discountPercent = (decimal)this.Discount / 100;
+                decimal totalPrice = (this.Price ?? 0) * (1 - discountPercent);
+                return Math.Round(totalPrice, 2);
+            }
+        }
+
+        public string ImagePath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.Photo))
+                {
+                    return "/Images/picture.png";
+                }
+                else
+                {
+                    return $"/Images/{this.Photo.Trim()}";
+                }
+            }
+        }
     
         public virtual Categories Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
