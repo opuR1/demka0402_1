@@ -5,16 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="BuildStore" Height="450" Width="800" Icon="/Images/icon.png" Background="{StaticResource MainBackgroundBrush}">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="51*"/>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="650*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" x:Name="HeaderPanel" Visibility="Collapsed">
-            <TextBlock x:Name="tbName" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,120,0"/>
-            <Button Content="Выйти" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0"/>
+        <Grid Grid.Row="0" x:Name="HeaderPanel" Visibility="Collapsed" Grid.ColumnSpan="5" Background="{StaticResource SecondaryBackgroundBrush}">
+            <TextBlock x:Name="tbName" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,120,0" FontSize="14" FontWeight="Bold"/>
+            <Button Content="Выйти" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0" Click="ButtonExit_Click" Height="30" Width="50" Background="{StaticResource MainBackgroundBrush}" FontSize="14" FontWeight="Bold"/>
+            <Image HorizontalAlignment="Left" Height="60" Margin="10,5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="64" Source="/Images/icon.png"/>
         </Grid>
-        <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden" Grid.ColumnSpan="5" Navigated="MainFrame_Navigated" />
     </Grid>
 </Window>
