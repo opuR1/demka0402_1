@@ -24,6 +24,7 @@ namespace WpfApp1.Pages
     {
         private string _fullname;
         private Users _user;
+        private List<Products> _allProducts = new List<Products>();
         public ProductList(Users user)
         {
             _user = user;
@@ -33,8 +34,10 @@ namespace WpfApp1.Pages
             {
                 visibleWindow.SetHeaderFullName(_fullname);
             }
-            //GetRole();
+
+            GetRole();
             LoadProducts();
+            LoadFilters();
 
         }
         private string GetFullName()
@@ -54,23 +57,131 @@ namespace WpfApp1.Pages
         {
             using (var db = kr_de1Entities.GetContext())
             {
-                var productsList = db.Products.Include(p => p.Categories).Include(p => p.Producers).Include(p => p.Suppliers).Include(p => p.Units).ToList();
-                lbProducts.ItemsSource = productsList;
+                _allProducts = db.Products.Include(p => p.Categories).Include(p => p.Producers).Include(p => p.Suppliers).Include(p => p.Units).ToList();
+                lbProducts.ItemsSource = _allProducts;
+
+                ApplyFilters();
             }
+        }
+        private void LoadFilters()
+        {
+            using (var db = kr_de1Entities.GetContext())
+            {
+                var producers = db.Producers.ToList();
+
+                var allProducersItem = new Producers { ProducerId = 0, ProducerName = "Все производители"};
+                producers.Insert(0, allProducersItem);
+
+                cmbFilter.ItemsSource = producers;
+                cmbFilter.DisplayMemberPath = "ProducerName";
+                cmbFilter.SelectedValuePath = "ProducerId";
+
+                cmbFilter.SelectedIndex = 0;
+            }
+        }
+        private void ApplyFilters()
+        {
+            if (_allProducts == null || _allProducts.Count == 0) return;
+
+            var filtered = _allProducts.AsEnumerable();
+
+            string searchText = tbSearch.Text.Trim().ToLower();
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                filtered = filtered.Where(p => p.ProductName.ToLower().Contains(searchText) || p.Categories.CategoryName.ToLower().Contains(searchText) || p.Description.ToLower().Contains(searchText));
+            }
+
+            if (cmbFilter.SelectedValue is int selectedProducerId && selectedProducerId > 0)
+            {
+                filtered = filtered.Where(p => p.ProducerId == selectedProducerId);
+            }
+
+            if (cmbSort.SelectedItem is ComboBoxItem selectedSort)
+            {
+                switch (selectedSort.Content.ToString())
+                {
+                    case "Price asc":
+                        filtered = filtered.OrderBy(p => p.Price);
+                        break;
+                    case "Price desc":
+                        filtered = filtered.OrderByDescending(p => p.Price);
+                        break;
+                    case "Discount asc":
+                        filtered = filtered.OrderBy(p => p.Discount);
+                        break;
+                    case "Discount desc":
+                        filtered = filtered.OrderByDescending(p => p.Discount);
+                        break;
+                    case "Count asc":
+                        filtered = filtered.OrderBy(p => p.Count);
+                        break;
+                    case "Count desc":
+                        filtered = filtered.OrderByDescending(p => p.Count);
+                        break;
+                }
+            }
+            lbProducts.ItemsSource = filtered.ToList();
         }
         private void GetRole()
         {
-            switch(_user.RoleId)
+            if(_user != null)
             {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                default: 
-                    break;
+                switch (_user.RoleId)
+                {
+                    case 1:
+                        spFinder.Visibility = Visibility.Visible;
+                        btnAdd.Visibility = Visibility.Visible;
+                        btnEdit.Visibility = Visibility.Visible;
+                        break;
+                    case 2:
+                        spFinder.Visibility = Visibility.Visible;
+                        btnAdd.Visibility = Visibility.Collapsed;
+                        btnEdit.Visibility = Visibility.Collapsed;
+                        break;
+                    case 3:
+                        spFinder.Visibility = Visibility.Collapsed;
+                        btnAdd.Visibility = Visibility.Collapsed;
+                        btnEdit.Visibility = Visibility.Collapsed;
+                        break;
+                    default:
+                        spFinder.Visibility = Visibility.Collapsed;
+                        btnAdd.Visibility = Visibility.Collapsed;
+                        btnEdit.Visibility = Visibility.Collapsed;
+                        break;
+                }
             }
+            else
+            {
+                spFinder.Visibility = Visibility.Collapsed;
+                btnAdd.Visibility = Visibility.Collapsed;
+                btnEdit.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void cmbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void cmbFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Products selectedProduct = lbProducts.SelectedItem as Products;
+            NavigationService.Navigate(new ProductEdit(selectedProduct));
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ProductEdit(null));
         }
     }
 }

@@ -27,6 +27,7 @@ namespace WpfApp1
         {
             InitializeComponent();
             MainFrame.Navigate(new Auth());
+
         }
         public void SetHeaderFullName(string FullName)
         {
@@ -50,6 +51,17 @@ namespace WpfApp1
             {
                 HeaderPanel.Visibility = Visibility.Visible;
             }
+            
+            if (e.Content is ProductList)
+            {
+                tbHeader.Text = "Список товаров";
+                btnBack.Visibility = Visibility.Collapsed;
+            }
+            if (e.Content is ProductEdit)
+            {
+                tbHeader.Text = "Редактирование/Добавление товара";
+                btnBack.Visibility = Visibility.Visible;
+            }
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
@@ -57,6 +69,18 @@ namespace WpfApp1
             tbName.Text = "";
             MainFrame.Navigate(new Auth());
             authService.ClearUser();
+        }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainFrame.Content is ProductList)
+            {
+                MainFrame.Navigate(new Auth());
+            }
+            else
+            {
+                MainFrame.GoBack();
+            }
         }
     }
 }

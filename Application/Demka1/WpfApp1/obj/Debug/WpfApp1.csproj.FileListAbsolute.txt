@@ -24,3 +24,5 @@ C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\o
 C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\obj\Debug\WpfApp1.csproj.Up2Date
 C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\obj\Debug\WpfApp1.exe
 C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\obj\Debug\WpfApp1.pdb
+C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\obj\Debug\Pages\ProductEdit.g.cs
+C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\obj\Debug\Pages\ProductEdit.baml

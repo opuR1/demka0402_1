@@ -53,17 +53,14 @@ namespace WpfApp1.Models
         {
             get
             {
-                if (string.IsNullOrEmpty(this.Photo))
-                {
-                    return "/Images/picture.png";
-                }
-                else
-                {
-                    return $"/Images/{this.Photo.Trim()}";
-                }
+                string photoName = string.IsNullOrEmpty(this.Photo) ? "picture.png" : this.Photo.Trim();
+
+                string fullPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", photoName);
+
+                return new Uri(fullPath).AbsoluteUri;
             }
         }
-    
+
         public virtual Categories Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdersInfo> OrdersInfo { get; set; }

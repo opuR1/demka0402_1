@@ -30,7 +30,31 @@
     </Page.Resources>
     
     <Grid>
-        <ListBox x:Name="lbProducts" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" x:Name="spFinder" Orientation="Horizontal" Visibility="Visible" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <TextBlock Text="Поиск:" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="Black"/>
+            <TextBox x:Name="tbSearch" Width="125" TextChanged="tbSearch_TextChanged"/>
+            <TextBlock Text="Сортировка:" VerticalAlignment="Center" Margin="10,0,5,0" Width="70" HorizontalAlignment="Left"/>
+            <ComboBox x:Name="cmbSort" Width="95" SelectionChanged="cmbSort_SelectionChanged">
+                <ComboBoxItem Content="Price asc"/>
+                <ComboBoxItem Content="Price desc"/>
+                <ComboBoxItem Content="Discount asc"/>
+                <ComboBoxItem Content="Discount desc"/>
+                <ComboBoxItem Content="Count asc"/>
+                <ComboBoxItem Content="Count desc"/>
+            </ComboBox>
+            <TextBlock Text="Производитель:" VerticalAlignment="Center" Margin="10,0,5,0" Width="70" HorizontalAlignment="Left"/>
+            <ComboBox x:Name="cmbFilter" Width="130" SelectionChanged="cmbFilter_SelectionChanged"/>
+            <Button Visibility="Collapsed" Content="Edit" x:Name="btnEdit" Margin="80,0,0,0" Width="50" Click="btnEdit_Click"/>
+            <Button Visibility="Collapsed" Content="Add" x:Name="btnAdd" Margin="10,0,0,0" Width="50" Click="btnAdd_Click"/>
+        </StackPanel>
+        
+        
+
+        <ListBox Grid.Row="1" x:Name="lbProducts" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border Style="{StaticResource ProductItemStyle}">
