@@ -26,3 +26,7 @@ C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\o
 C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\obj\Debug\WpfApp1.pdb
 C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\obj\Debug\Pages\ProductEdit.g.cs
 C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\obj\Debug\Pages\ProductEdit.baml
+C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\obj\Debug\Pages\OrderEdit.g.cs
+C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\obj\Debug\Pages\OrderList.g.cs
+C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\obj\Debug\Pages\OrderEdit.baml
+C:\учеба\МДК.04.02(Кретинин)\demka1\Application\Demka1\WpfApp1\obj\Debug\Pages\OrderList.baml

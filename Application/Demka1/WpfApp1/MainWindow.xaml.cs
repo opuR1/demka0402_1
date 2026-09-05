@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Models;
 using WpfApp1.Pages;
 using WpfApp1.Service;
 
@@ -23,6 +24,7 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         AuthorizationService authService = new AuthorizationService();
+        private Users _user = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -60,6 +62,16 @@ namespace WpfApp1
             if (e.Content is ProductEdit)
             {
                 tbHeader.Text = "Редактирование/Добавление товара";
+                btnBack.Visibility = Visibility.Visible;
+            }
+            if (e.Content is OrderList)
+            {
+                tbHeader.Text = "Список заказов";
+                btnBack.Visibility = Visibility.Visible;
+            }
+            if (e.Content is OrderEdit)
+            {
+                tbHeader.Text = "Редактирование/Добавление заказа";
                 btnBack.Visibility = Visibility.Visible;
             }
         }

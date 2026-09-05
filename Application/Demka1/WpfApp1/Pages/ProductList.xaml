@@ -48,7 +48,8 @@
             </ComboBox>
             <TextBlock Text="Производитель:" VerticalAlignment="Center" Margin="10,0,5,0" Width="70" HorizontalAlignment="Left"/>
             <ComboBox x:Name="cmbFilter" Width="130" SelectionChanged="cmbFilter_SelectionChanged"/>
-            <Button Visibility="Collapsed" Content="Edit" x:Name="btnEdit" Margin="80,0,0,0" Width="50" Click="btnEdit_Click"/>
+            <Button Visibility="Collapsed" Content="Заказы" x:Name="btnOrders" Margin="30,0,0,0" Width="50" Click="btnOrders_Click"/>
+            <Button Visibility="Collapsed" Content="Edit" x:Name="btnEdit" Margin="10,0,0,0" Width="50" Click="btnEdit_Click"/>
             <Button Visibility="Collapsed" Content="Add" x:Name="btnAdd" Margin="10,0,0,0" Width="50" Click="btnAdd_Click"/>
         </StackPanel>
         

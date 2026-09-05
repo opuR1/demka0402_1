@@ -28,6 +28,17 @@ namespace WpfApp1.Models
         public string Code { get; set; }
         public int OrderStatusId { get; set; }
     
+        public string PointAdress
+        {
+            get
+            {
+                string city = PickupPoints.Cities.CityName;
+
+                string index = !string.IsNullOrEmpty(PickupPoints.AdressIndex) ? $"{PickupPoints.AdressIndex}" : "";
+
+                return $"{index}, г.{city}, ул.{PickupPoints.Street}, д.{PickupPoints.House}";
+            }
+        }
         public virtual OrderStatuses OrderStatuses { get; set; }
         public virtual PickupPoints PickupPoints { get; set; }
         public virtual Users Users { get; set; }

@@ -132,19 +132,23 @@ namespace WpfApp1.Pages
                         spFinder.Visibility = Visibility.Visible;
                         btnAdd.Visibility = Visibility.Visible;
                         btnEdit.Visibility = Visibility.Visible;
+                        btnOrders.Visibility = Visibility.Visible;
                         break;
                     case 2:
                         spFinder.Visibility = Visibility.Visible;
+                        btnOrders.Visibility = Visibility.Visible;
                         btnAdd.Visibility = Visibility.Collapsed;
                         btnEdit.Visibility = Visibility.Collapsed;
                         break;
                     case 3:
                         spFinder.Visibility = Visibility.Collapsed;
+                        btnOrders.Visibility = Visibility.Collapsed;
                         btnAdd.Visibility = Visibility.Collapsed;
                         btnEdit.Visibility = Visibility.Collapsed;
                         break;
                     default:
                         spFinder.Visibility = Visibility.Collapsed;
+                        btnOrders.Visibility = Visibility.Collapsed;
                         btnAdd.Visibility = Visibility.Collapsed;
                         btnEdit.Visibility = Visibility.Collapsed;
                         break;
@@ -182,6 +186,11 @@ namespace WpfApp1.Pages
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ProductEdit(null));
+        }
+
+        private void btnOrders_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OrderList(_user));
         }
     }
 }

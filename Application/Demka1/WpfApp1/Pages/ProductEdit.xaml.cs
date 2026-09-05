@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -36,7 +37,7 @@ namespace WpfApp1.Pages
         };
         private Dictionary<int, string> _units = new Dictionary<int, string>
         {
-            {1, "шт."}, {2, ""}
+            {1, "шт."}
         };
         private Dictionary<int, string> _categories = new Dictionary<int, string>
         {
@@ -167,6 +168,7 @@ namespace WpfApp1.Pages
                     }
                     else
                     {
+                        db.Entry(_product).State = EntityState.Modified;
                         MessageBox.Show("Данные товара успешно обновлены!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
 
