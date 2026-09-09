@@ -25,66 +25,11 @@ namespace WpfApp1.Pages
         private Orders _order;
         private bool IsNew;
         private kr_de1Entities db = kr_de1Entities.GetContext();
-        private Dictionary<int, string> _pickupPoints = new Dictionary<int, string>
-        {
-            {1, "г.Лесной, ул. Вишневая, 32"},
-            {2, "г.Лесной, ул. Подгорная, 8"},
-            {3, "г.Лесной, ул. Шоссейная, 24"},
-            {4, "г.Лесной, ул. Зеленая, 32"},
-            {5, "г.Лесной, ул. Маяковского, 47"},
-            {6, "г.Лесной, ул. Светлая, 46"},
-            {7, "г.Лесной, ул. Цветочная, 8"},
-            {8, "г.Лесной, ул. Коммунистическая, 1"},
-            {9, "г.Лесной, ул. Спортивная, 46"},
-            {10, "г.Лесной, ул. Гоголя, 41"},
-            {11, "г.Лесной, ул. Северная, 13"},
-            {12, "г.Лесной, ул. Молодежная, 50"},
-            {13, "г.Лесной, ул. Новая, 19"},
-            {14, "г.Лесной, ул. Октябрьская, 19"},
-            {15, "г.Лесной, ул. Садовая, 4"},
-            {16, "г.Лесной, ул. Фрунзе, 43"},
-            {17, "г.Лесной, ул. Школьная, 50"},
-            {18, "г.Лесной, ул. Коммунистическая, 20"},
-            {19, "г.Лесной,  ул. 8 Марта"},
-            {20, "г.Лесной, ул. Комсомольская, 26"},
-            {21, "г.Лесной, ул. Чехова, 3"},
-            {22, "г.Лесной, ул. Дзержинского, 28"},
-            {23, "г.Лесной, ул. Набережная, 30"},
-            {24, "г.Лесной, ул. Чехова, 24"},
-            {25, "г.Лесной,  ул. Степная, 30"},
-            {26, "г.Лесной, ул. Коммунистическая, 43"},
-            {27, "г.Лесной, ул. Солнечная, 25"},
-            {28, "г.Лесной, ул. Шоссейная, 40"},
-            {29, "г.Лесной, ул. Партизанская, 49"},
-            {30, "г.Лесной, ул. Победы, 46"},
-            {31, "г.Лесной, ул. Полевая, 35"},
-            {32, "г.Лесной, ул. Маяковского, 44"},
-            {33, "г.Лесной, ул. Клубная, 44"},
-            {34, "г.Лесной, ул. Некрасова, 12"},
-            {35, "г.Лесной, ул. Комсомольская, 17"},
-            {36, "г.Лесной, ул. Мичурина, 26"}
+        private List<PickupPoints> _pickupPoints;
 
-        };
+        private List<Users> _allUsers;
 
-        private Dictionary<int, string> _allUsers = new Dictionary<int, string>
-        {
-            {1, "Ворсин Петр Евгеньевич"},
-            {2, "Старикова Елена Павловна"},
-            {3, "Одинцов Серафим Артёмович"},
-            {4, "Степанов Михаил Артёмович"},
-            {5, "Ворсин Петр Евгеньевич"},
-            {6, "Старикова Елена Павловна"},
-            {7, "Михайлюк Анна Вячеславовна"},
-            {8, "Ситдикова Елена Анатольевна"},
-            {9, "Никифорова Весения Николаевна"},
-            {10, "Сазонов Руслан Германович"}
-        };
-
-        private Dictionary<int, string> _OStatuses = new Dictionary<int, string>
-        {
-            {1, "Завершен"},
-            {2, "Новый"}
-        };
+        private List<OrderStatuses> _orderStatuses;
         public OrderEdit(Orders order)
         {
             InitializeComponent();
@@ -113,16 +58,19 @@ namespace WpfApp1.Pages
 
         private void LoadCMB()
         {
-            cmbOrderStatus.SelectedValuePath = "Key";
-            cmbOrderStatus.DisplayMemberPath = "Value";
-            cmbOrderStatus.ItemsSource = _OStatuses;
+            _orderStatuses = db.OrderStatuses.ToList();
+            cmbOrderStatus.SelectedValuePath = "OStatusId";
+            cmbOrderStatus.DisplayMemberPath = "OStatusName";
+            cmbOrderStatus.ItemsSource = _orderStatuses;
 
-            cmbPickupPoint.SelectedValuePath = "Key";
-            cmbPickupPoint.DisplayMemberPath = "Value";
+            _pickupPoints = db.PickupPoints.ToList();
+            cmbPickupPoint.SelectedValuePath = "PointId";
+            cmbPickupPoint.DisplayMemberPath = "FullAdress";
             cmbPickupPoint.ItemsSource = _pickupPoints;
 
-            cmbUser.SelectedValuePath = "Key";
-            cmbUser.DisplayMemberPath = "Value";
+            _allUsers = db.Users.ToList();
+            cmbUser.SelectedValuePath = "UserId";
+            cmbUser.DisplayMemberPath = "FullName";
             cmbUser.ItemsSource = _allUsers;
         }
         private void btnSave_Click(object sender, RoutedEventArgs e)

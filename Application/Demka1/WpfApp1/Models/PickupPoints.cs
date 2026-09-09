@@ -26,6 +26,14 @@ namespace WpfApp1.Models
         public string Street { get; set; }
         public string House { get; set; }
     
+        public string FullAdress
+        {
+            get
+            {
+                string city = Cities.CityName;
+                return $"{AdressIndex}, {city}, {Street}, {House}";
+            }
+        }
         public virtual Cities Cities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }

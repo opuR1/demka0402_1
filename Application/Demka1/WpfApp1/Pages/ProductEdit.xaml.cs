@@ -28,25 +28,10 @@ namespace WpfApp1.Pages
         private bool IsNewProduct;
         private kr_de1Entities db = kr_de1Entities.GetContext();
         private string _sourceFilePath = null;
-        private Dictionary<int, string> _producers = new Dictionary<int, string>
-        {
-            {1, "М500"}, {2, "Изостронг"}, {3, "Knauf"}, {4, "MixMaster"},
-            {5, "ЛСР"}, {6, "ВОЛМА"}, {7, "Vinylon"}, {8, "Павловский завод"},
-            {9, "Weber"}, {10, "Hesler"}, {11, "Armero"}, {12, "Wenzo Roma"},
-            {13, "KILIMGRIN"}, {14, "Исток"}, {15, "RUIZ"}, {16, "Husqvarna"}, {17, "Delta"}
-        };
-        private Dictionary<int, string> _units = new Dictionary<int, string>
-        {
-            {1, "шт."}
-        };
-        private Dictionary<int, string> _categories = new Dictionary<int, string>
-        {
-            {1, "Общестроительные материалы"},
-            {2, "Стеновые и фасадные материалы"},
-            {3, "Сухие строительные смеси и гидроизоляция"},
-            {4, "Ручной инструмент"},
-            {5, "Защита лица, глаз, головы"}
-        };
+        private List<Producers> _producers;
+        private List<Suppliers> _suppliers;
+        private List<Units> _units;
+        private List<Categories> _categories;
 
         public ProductEdit(Products product)
         {
@@ -90,20 +75,24 @@ namespace WpfApp1.Pages
 
         private void LoadComboBoxes()
         {
-            cmbCategory.SelectedValuePath = "Key";
-            cmbCategory.DisplayMemberPath = "Value";
+            _categories = db.Categories.ToList();
+            cmbCategory.SelectedValuePath = "CategoryId";
+            cmbCategory.DisplayMemberPath = "CategoryName";
             cmbCategory.ItemsSource = _categories;
 
-            cmbProducer.SelectedValuePath = "Key";
-            cmbProducer.DisplayMemberPath = "Value";
+            _producers = db.Producers.ToList();
+            cmbProducer.SelectedValuePath = "ProducerId";
+            cmbProducer.DisplayMemberPath = "ProducerName";
             cmbProducer.ItemsSource = _producers;
 
-            cmbSupplier.SelectedValuePath = "Key";
-            cmbSupplier.DisplayMemberPath = "Value";
-            cmbSupplier.ItemsSource = _producers;
+            _suppliers = db.Suppliers.ToList();
+            cmbSupplier.SelectedValuePath = "SupplierId";
+            cmbSupplier.DisplayMemberPath = "SupplierName";
+            cmbSupplier.ItemsSource = _suppliers;
 
-            cmbUnits.SelectedValuePath = "Key";
-            cmbUnits.DisplayMemberPath = "Value";
+            _units = db.Units.ToList();
+            cmbUnits.SelectedValuePath = "UnitId";
+            cmbUnits.DisplayMemberPath = "Name";
             cmbUnits.ItemsSource = _units;
         }
 

@@ -27,6 +27,13 @@ namespace WpfApp1.Models
         public string MiddleName { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return $"{LastName} {FirstName} {MiddleName}";
+            }
+        }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }
